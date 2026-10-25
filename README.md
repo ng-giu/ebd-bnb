@@ -1,3 +1,5 @@
-# ebd bn'b, end of Lab 4
+# ebd bn'b, end of Lab 5
 
-The full REST API, on an in-memory array. Run it: `npm install`, then `npm run dev`.
+The API on MongoDB Atlas, in one file. It needs a `.env` next to `package.json` with your own `MONGODB_URI`: use the file Atlas gave you in Lab 5 (`.env.example` shows its shape).
+
+Run it: `npm install`, then `npm run dev`.
