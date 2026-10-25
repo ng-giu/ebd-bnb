@@ -1,3 +1,3 @@
-# ebd bn'b, end of Lab 3
+# ebd bn'b, end of Lab 4
 
-Run it: `npm install`, then `npm run dev`. Then open http://localhost:3000/api/listings.
+The full REST API, on an in-memory array. Run it: `npm install`, then `npm run dev`.
