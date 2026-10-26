@@ -12,3 +12,4 @@ one branch per finished lab. Pick a branch, then **Code → Download ZIP**.
 | `lab-06` | `backend/` (Lab 5, Part 2) and a React front end in `frontend/` |
 | `lab-07` | React Router: pages, a form to add a listing, delete, a page per listing |
 | `lab-08` | The front end loads, adds and deletes through the API; `cors` and `/api/health` in the back end |
+| `lab-09` | Users: register and log in (bcrypt, JWT), protected routes, an owner on every listing |
