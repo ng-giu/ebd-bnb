@@ -1,18 +1,41 @@
-// ebd bn'b: the whole page, built from components (Lab 6)
+// ebd bn'b: the app, its routes and its state (Lab 7)
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router";
 import Header from "./components/Header.jsx";
-import ListingCard from "./components/ListingCard.jsx";
-import listings from "./data/listings.js";
+import HomePage from "./pages/HomePage.jsx";
+import ListingPage from "./pages/ListingPage.jsx";
+import AddListingPage from "./pages/AddListingPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
+import initialListings from "./data/listings.js";
 
 function App() {
-  // One card per listing
-  const cards = listings.map((listing) => (
-    <ListingCard key={listing._id} listing={listing} />
-  ));
+  // App remembers the listings, and gives them to pages
+  const [listings, setListings] = useState(initialListings);
+
+  function addListing(listing) {
+    // A new array: all the listings, then the new one
+    setListings([...listings, listing]);
+  }
+
+  function deleteListing(id) {
+    // A new array: all the listings but that one
+    setListings(listings.filter((l) => l._id !== id));
+  }
+
+  // Runs after a render, whenever listings changes
+  useEffect(() => {
+    document.title = `ebd bn'b (${listings.length} listings)`;
+  }, [listings]);
 
   return (
     <main>
       <Header />
-      <div className="listings">{cards}</div>
+      <Routes>
+        <Route path="/" element={<HomePage listings={listings} onDelete={deleteListing} />} />
+        <Route path="/listings/:id" element={<ListingPage listings={listings} />} />
+        <Route path="/add" element={<AddListingPage onAdd={addListing} />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </main>
   );
 }
