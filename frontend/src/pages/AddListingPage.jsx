@@ -1,4 +1,4 @@
-// ebd bn'b: a form to add a listing (Lab 7)
+// ebd bn'b: a form to add a listing (Lab 8: saved by the API)
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -8,16 +8,16 @@ function AddListingPage({ onAdd }) {
   const [price, setPrice] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     // Stop the browser from reloading the page
     event.preventDefault();
-    onAdd({
-      // A random unique id. In Lab 8, MongoDB makes it
-      _id: crypto.randomUUID(),
-      title: title,
-      pricePerNight: Number(price),
-    });
-    navigate("/"); // back to all listings
+    try {
+      // No _id: MongoDB makes it
+      await onAdd({ title: title, pricePerNight: Number(price) });
+      navigate("/"); // back to all listings
+    } catch (err) {
+      alert(`Could not save it: ${err.message}`);
+    }
   }
 
   return (

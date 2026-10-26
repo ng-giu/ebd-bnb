@@ -1,4 +1,4 @@
-// ebd bn'b: the app, its routes and its state (Lab 7)
+// ebd bn'b: the app, its routes and its state (Lab 8)
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import Header from "./components/Header.jsx";
@@ -6,26 +6,45 @@ import HomePage from "./pages/HomePage.jsx";
 import ListingPage from "./pages/ListingPage.jsx";
 import AddListingPage from "./pages/AddListingPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-import initialListings from "./data/listings.js";
+import {
+  getListings,
+  createListing,
+  removeListing,
+} from "./api/listings.js";
 
 function App() {
-  // App remembers the listings, and gives them to pages
-  const [listings, setListings] = useState(initialListings);
+  // Empty until the API answers
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  function addListing(listing) {
-    // A new array: all the listings, then the new one
-    setListings([...listings, listing]);
-  }
-
-  function deleteListing(id) {
-    // A new array: all the listings but that one
-    setListings(listings.filter((l) => l._id !== id));
-  }
+  // Once, when the app starts: ask the API for the listings
+  useEffect(() => {
+    getListings()
+      .then((data) => setListings(data))
+      .catch(() => setError("Can't reach the API."))
+      .finally(() => setLoading(false));
+  }, []);
 
   // Runs after a render, whenever listings changes
   useEffect(() => {
     document.title = `ebd bn'b (${listings.length} listings)`;
   }, [listings]);
+
+  async function addListing(listing) {
+    // The API saves it, and sends it back with its _id
+    const saved = await createListing(listing);
+    setListings([...listings, saved]);
+  }
+
+  async function deleteListing(id) {
+    await removeListing(id); // gone from MongoDB
+    setListings(listings.filter((l) => l._id !== id));
+  }
+
+  // Until the API answers, show only this
+  if (loading) return <p className="page">Loading...</p>;
+  if (error) return <p className="page error">{error}</p>;
 
   return (
     <main>

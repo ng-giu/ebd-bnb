@@ -1,4 +1,4 @@
-/* ebd bn'b: the styles for the whole app (Labs 6 and 7).
+/* ebd bn'b: the styles for the whole app (Labs 6 to 8).
    Paste them in; you don't need to read them. */
 * { box-sizing: border-box; }
 
@@ -81,3 +81,6 @@ main {
   color: white;
   cursor: pointer;
 }
+
+/* Lab 8: when the API can't be reached */
+.error { border-left: 4px solid #e2001a; color: #a30013; }
