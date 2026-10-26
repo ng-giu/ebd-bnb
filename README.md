@@ -10,3 +10,4 @@ one branch per finished lab. Pick a branch, then **Code → Download ZIP**.
 | `lab-05` | The API on MongoDB Atlas, in one file |
 | `lab-05-part2` | The same API, split into `db.js`, `models/`, `controllers/`, `routes/` |
 | `lab-06` | `backend/` (Lab 5, Part 2) and a React front end in `frontend/` |
+| `lab-07` | React Router: pages, a form to add a listing, delete, a page per listing |
