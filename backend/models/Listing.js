@@ -1,4 +1,4 @@
-// ebd bn'b: the listings model (Lab 5, part 2)
+// ebd bn'b: the listings model (Lab 9: every listing has an owner)
 // The only code that touches the data
 import mongoose from "mongoose";
 
@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 const listingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   pricePerNight: { type: Number, required: true },
+  // The _id of the user who listed it
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 // The model: our handle on the "listings" collection

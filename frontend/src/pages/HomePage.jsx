@@ -1,7 +1,7 @@
-// ebd bn'b: the home page, every listing as a card (Lab 8)
+// ebd bn'b: a page of listing cards (Lab 9: all, or only mine)
 import ListingCard from "../components/ListingCard.jsx";
 
-function HomePage({ listings, onDelete }) {
+function HomePage({ listings, user, onDelete }) {
   if (listings.length === 0) {
     return <p className="page">No listings yet. Add one!</p>;
   }
@@ -11,6 +11,7 @@ function HomePage({ listings, onDelete }) {
     <ListingCard
       key={listing._id}
       listing={listing}
+      user={user}
       onDelete={onDelete}
     />
   ));

@@ -1,4 +1,4 @@
-// ebd bn'b: every request the front end sends to our API (Lab 8)
+// ebd bn'b: every request the front end sends to our API (Lab 9: with the token)
 const API = "http://localhost:3000/api/listings";
 
 export async function getListings() {
@@ -13,10 +13,16 @@ export async function getListing(id) {
   return res.json();
 }
 
+// "Bearer <token>": who is asking. Saved in the browser at login
+function authHeader() {
+  const token = localStorage.getItem("token");
+  return { Authorization: `Bearer ${token}` };
+}
+
 export async function createListing(listing) {
   const res = await fetch(API, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...authHeader() },
     body: JSON.stringify(listing),
   });
   if (!res.ok) throw new Error(`POST failed: ${res.status}`);
@@ -24,6 +30,9 @@ export async function createListing(listing) {
 }
 
 export async function removeListing(id) {
-  const res = await fetch(`${API}/${id}`, { method: "DELETE" });
+  const res = await fetch(`${API}/${id}`, {
+    method: "DELETE",
+    headers: authHeader(),
+  });
   if (!res.ok) throw new Error(`DELETE failed: ${res.status}`);
 }

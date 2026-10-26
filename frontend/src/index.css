@@ -1,4 +1,4 @@
-/* ebd bn'b: the styles for the whole app (Labs 6 to 8).
+/* ebd bn'b: the styles for the whole app (Labs 6 to 9).
    Paste them in; you don't need to read them. */
 * { box-sizing: border-box; }
 
@@ -84,3 +84,19 @@ main {
 
 /* Lab 8: when the API can't be reached */
 .error { border-left: 4px solid #e2001a; color: #a30013; }
+
+/* Lab 9: who is logged in, in the header */
+.header nav { align-items: center; }
+.header nav span { color: #666; }
+.header nav button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #e2001a;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* Log in, register: labels above inputs */
+.form > label:not(:has(input)) { margin-bottom: 0; }
+.form > input { margin-bottom: 16px; }

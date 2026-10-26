@@ -1,8 +1,9 @@
-// ebd bn'b: the listings API (Lab 8: the front end can call it now)
+// ebd bn'b: the listings API, with users (Lab 9)
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./db.js";
 import listingRoutes from "./routes/listingRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 app.use("/api/listings", listingRoutes);
+app.use("/api/auth", authRoutes);
 
 // ========== START ==========
 await connectDB();

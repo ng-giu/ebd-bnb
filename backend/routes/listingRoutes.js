@@ -1,5 +1,6 @@
-// ebd bn'b: the listings routes (Lab 5, part 2)
+// ebd bn'b: the listings routes (Lab 9: changing listings needs a login)
 import express from "express";
+import { requireAuth } from "../middleware/auth.js";
 import {
   handleGetAll,
   handleGetOne,
@@ -8,13 +9,14 @@ import {
   handleDelete,
 } from "../controllers/listingController.js";
 
-// A mini app for listings, mounted in server.js
 const router = express.Router();
 
+// Anyone may look
 router.get("/", handleGetAll);
 router.get("/:id", handleGetOne);
-router.post("/", handleCreate);
-router.put("/:id", handleUpdate);
-router.delete("/:id", handleDelete);
+// Only a logged-in user may change: requireAuth runs first
+router.post("/", requireAuth, handleCreate);
+router.put("/:id", requireAuth, handleUpdate);
+router.delete("/:id", requireAuth, handleDelete);
 
 export default router;
